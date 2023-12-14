@@ -62,7 +62,12 @@ export default function App() {
         <div id="sidebar">
           <h1>Remix Contacts</h1>
           <div className={navigation.state === "loading" ? "loading" : ""}>
-            <Form id="search-form" role="search" onChange={(event)=>submit(event.currentTarget)}>
+            <Form id="search-form" role="search" onChange={(event)=>{
+              const isFirstSearch = q === null
+              submit(event.currentTarget, {
+                replace: !isFirstSearch
+              })
+              }}>
               <input
                 id="q"
                 defaultValue={q || ""}
